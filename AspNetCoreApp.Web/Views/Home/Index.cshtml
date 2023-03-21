@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Css{
+    <link rel="stylesheet" href="~/css/example.css" asp-append-version="true" />
+    <style>
+        h1 {
+            color: red;
+            background-color: blue;
+        }
+    </style>
+}
+@section Scripts{
+    <script type="text/javascript">
+        //alert("Hoşgeldin! ");
+        $(document).ready(function () {
+            console.log("Sayfamıza hoşgeldin");
+        })
+    </script>
+}
+<h1>Merhaba Dünya</h1>
+<hr />
+<h2>Merhaba Dünya</h2>
+<partial name="_MenuPartialView" />
