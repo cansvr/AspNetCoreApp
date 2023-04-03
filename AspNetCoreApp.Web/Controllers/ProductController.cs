@@ -5,15 +5,19 @@ namespace AspNetCoreApp.Web.Controllers
 {
     public class ProductController : Controller
     {
+        private AppDbContext _context;
+
         private readonly ProductRepository _productRepository;
-        public ProductController()
+        public ProductController(AppDbContext context)
         {
             _productRepository = new ProductRepository();
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            var products = _productRepository.GetAll();
+            //var products = _productRepository.GetAll();
+            var products = _context.Products.ToList();
             return View(products);
         }
 
@@ -29,7 +33,9 @@ namespace AspNetCoreApp.Web.Controllers
 
         public IActionResult Remove(int id)
         {
-            _productRepository.Remove(id);
+            var product = _context.Products.Find(id);
+            _context.Products.Remove(product);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
